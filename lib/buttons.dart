@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 
-import '../true_idle_game.dart';
+import 'true_idle_game.dart';
 
 class PlusOne extends SpriteComponent with TapCallbacks {
   final TrueIdleGame game;

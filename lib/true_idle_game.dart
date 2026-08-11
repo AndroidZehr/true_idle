@@ -4,10 +4,10 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
-import '../ui.dart';
-import '../buttons.dart';
-import '../enemies.dart';
-import '../player.dart';
+import 'ui.dart';
+import 'buttons.dart';
+import 'enemies.dart';
+import 'player.dart';
 
 class TrueIdleGame extends FlameGame {
   ValueNotifier<int> money = ValueNotifier<int>(0);
