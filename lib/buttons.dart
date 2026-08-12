@@ -5,6 +5,7 @@ import 'true_idle_game.dart';
 
 class PlusOne extends SpriteComponent with TapCallbacks {
   final TrueIdleGame game;
+
   final Sprite normalSprite;
   final Sprite pressedSprite;
 
@@ -21,6 +22,7 @@ class PlusOne extends SpriteComponent with TapCallbacks {
   @override
   void onTapDown(TapDownEvent event) {
     sprite = pressedSprite;
+
     game.money.value++;
   }
 

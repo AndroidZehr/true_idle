@@ -4,7 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
-import 'ui.dart';
+import 'box.dart';
 import 'buttons.dart';
 import 'enemies.dart';
 import 'player.dart';
@@ -14,7 +14,7 @@ class TrueIdleGame extends FlameGame {
 
   @override
   Color backgroundColor() {
-    return const Color.fromARGB(255, 53, 53, 53);
+    return const Color.fromARGB(255, 3, 3, 3);
   }
 
   @override
@@ -27,13 +27,50 @@ class TrueIdleGame extends FlameGame {
     final enemyImage = await images.load('Enemy1.png');
     final playerImage = await images.load('Player.png');
 
-    // Calculate the size of the top game area
+    // --------------------------------------------------
+    // SCREEN LAYOUT
+    // --------------------------------------------------
+
     final gameAreaHeight = size.y * 0.48;
 
-    // Put the player in the center of the top area
+    final topBoxPosition = Vector2(4, 4);
+
+    final topBoxSize = Vector2(size.x - 8, gameAreaHeight - 8);
+
+    final bottomBoxPosition = Vector2(4, gameAreaHeight + 4);
+
+    final bottomBoxSize = Vector2(size.x - 8, size.y - gameAreaHeight - 8);
+
+    // --------------------------------------------------
+    // TOP BOX
+    // --------------------------------------------------
+
+    add(BoxComponent(position: topBoxPosition, size: topBoxSize));
+
+    // --------------------------------------------------
+    // BOTTOM BOX
+    // --------------------------------------------------
+
+    add(BoxComponent(position: bottomBoxPosition, size: bottomBoxSize));
+
+    // --------------------------------------------------
+    // PLAYER
+    // --------------------------------------------------
+
     final playerPosition = Vector2(size.x / 2, gameAreaHeight / 2);
 
-    // Add the money button
+    add(PlayerComponent(sprite: Sprite(playerImage), position: playerPosition));
+
+    // --------------------------------------------------
+    // ENEMY
+    // --------------------------------------------------
+
+    spawnEnemy(Sprite(enemyImage), playerPosition, gameAreaHeight);
+
+    // --------------------------------------------------
+    // BUTTON
+    // --------------------------------------------------
+
     add(
       PlusOne(
         game: this,
@@ -41,32 +78,11 @@ class TrueIdleGame extends FlameGame {
         pressedSprite: Sprite(plusOnePressedImage),
       ),
     );
-
-    // Add the player
-    add(PlayerComponent(sprite: Sprite(playerImage), position: playerPosition));
-
-    // Add an enemy
-    spawnEnemy(Sprite(enemyImage), playerPosition, gameAreaHeight);
-
-    // Add top border
-    add(
-      BorderComponent(
-        position: Vector2(4, 4),
-        size: Vector2(size.x - 8, gameAreaHeight - 8),
-      ),
-    );
-
-    // Add bottom border
-    add(
-      BorderComponent(
-        position: Vector2(4, gameAreaHeight + 4),
-        size: Vector2(size.x - 8, size.y - gameAreaHeight - 8),
-      ),
-    );
   }
 
   void spawnEnemy(Sprite sprite, Vector2 target, double gameAreaHeight) {
     final random = Random();
+
     final side = random.nextInt(4);
 
     late Vector2 spawnPosition;
