@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'true_idle_game.dart';
 import 'package:flame/components.dart';
-import 'package:flutter/material.dart';
 
 class BorderComponent extends PositionComponent {
   final double borderRadius;
