@@ -1,6 +1,5 @@
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-
 import 'true_idle_game.dart';
 
 class PlusOne extends SpriteComponent with TapCallbacks {
@@ -22,12 +21,16 @@ class PlusOne extends SpriteComponent with TapCallbacks {
   @override
   void onTapDown(TapDownEvent event) {
     sprite = pressedSprite;
-
-    game.money.value++;
   }
 
   @override
   void onTapUp(TapUpEvent event) {
+    sprite = normalSprite;
+    game.money.value++;
+  }
+
+  @override
+  void onTapCancel(TapCancelEvent event) {
     sprite = normalSprite;
   }
 }

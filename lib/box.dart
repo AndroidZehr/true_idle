@@ -21,7 +21,7 @@ class BoxComponent extends PositionComponent {
 
     // Background
     final backgroundPaint = Paint()
-      ..color = Colors.grey
+      ..color = const Color.fromARGB(255, 10, 10, 10)
       ..style = PaintingStyle.fill;
 
     canvas.drawRRect(rect, backgroundPaint);

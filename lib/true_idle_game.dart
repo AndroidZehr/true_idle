@@ -3,13 +3,14 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:flame/collisions.dart';
 
 import 'box.dart';
 import 'buttons.dart';
 import 'enemies.dart';
 import 'player.dart';
 
-class TrueIdleGame extends FlameGame {
+class TrueIdleGame extends FlameGame with HasCollisionDetection {
   ValueNotifier<int> money = ValueNotifier<int>(0);
 
   @override
@@ -73,10 +74,15 @@ class TrueIdleGame extends FlameGame {
 
     add(
       PlusOne(
-        game: this,
-        normalSprite: Sprite(plusOneImage),
-        pressedSprite: Sprite(plusOnePressedImage),
-      ),
+          game: this,
+          normalSprite: Sprite(plusOneImage),
+          pressedSprite: Sprite(plusOnePressedImage),
+        )
+        ..position = Vector2(
+          bottomBoxPosition.x + bottomBoxSize.x / 2,
+          bottomBoxPosition.y + bottomBoxSize.y / 6,
+        )
+        ..anchor = Anchor.center,
     );
   }
 

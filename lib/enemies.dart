@@ -1,8 +1,8 @@
 import 'dart:math';
-
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
-class EnemyComponent extends SpriteComponent {
+class EnemyComponent extends SpriteComponent with CollisionCallbacks {
   final Vector2 target;
   final double speed;
 
@@ -11,7 +11,11 @@ class EnemyComponent extends SpriteComponent {
     required this.target,
     required Vector2 spawnPosition,
     this.speed = 50,
-  }) : super(size: Vector2(32, 32), position: spawnPosition);
+  }) : super(
+         size: Vector2(32, 32),
+         position: spawnPosition,
+         anchor: Anchor.center,
+       );
 
   @override
   void update(double dt) {
@@ -22,8 +26,7 @@ class EnemyComponent extends SpriteComponent {
     if (direction.length > 0) {
       direction.normalize();
 
-      angle = atan2(direction.x, direction.y);
-
+      angle = atan2(-direction.x, direction.y);
       position += direction * speed * dt;
     }
   }

@@ -23,7 +23,7 @@ class CashDisplay extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: Colors.grey,
+                color: Color.fromARGB(255, 10, 10, 10),
               ),
             );
           },
