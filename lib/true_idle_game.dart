@@ -23,8 +23,7 @@ class TrueIdleGame extends FlameGame with HasCollisionDetection {
     await super.onLoad();
 
     // Load images
-    final plusOneImage = await images.load('PlusOne.png');
-    final plusOnePressedImage = await images.load('PlusOne_pressed.png');
+    final plusOneIconImage = await images.load('PlusOne_icon.png');
     final enemyImage = await images.load('Enemy1.png');
     final playerImage = await images.load('Player.png');
 
@@ -72,17 +71,20 @@ class TrueIdleGame extends FlameGame with HasCollisionDetection {
     // BUTTON
     // --------------------------------------------------
 
+    final buttonWidth = bottomBoxSize.x * 0.32;
+    final buttonHeight = buttonWidth / 3;
+
     add(
       PlusOne(
-          game: this,
-          normalSprite: Sprite(plusOneImage),
-          pressedSprite: Sprite(plusOnePressedImage),
-        )
-        ..position = Vector2(
+        game: this,
+        icon: Sprite(plusOneIconImage),
+        size: Vector2(buttonWidth, buttonHeight),
+        position: Vector2(
           bottomBoxPosition.x + bottomBoxSize.x / 2,
           bottomBoxPosition.y + bottomBoxSize.y / 6,
-        )
-        ..anchor = Anchor.center,
+        ),
+        anchor: Anchor.center,
+      ),
     );
   }
 
