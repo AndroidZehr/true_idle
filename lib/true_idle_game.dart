@@ -41,7 +41,11 @@ class TrueIdleGame extends FlameGame with HasCollisionDetection {
     add(BoxComponent(position: bottomBoxPosition, size: bottomBoxSize));
     add(PlayerComponent(sprite: Sprite(playerImage), position: playerPosition));
     add(
-      CashDisplayBackground(position: Vector2(400, 20), size: Vector2(150, 60)),
+      CashDisplay(
+        game: this,
+        position: Vector2(size.x - 180, 46),
+        size: Vector2(170, 60),
+      ),
     );
     spawnEnemy(Sprite(enemyImage), playerPosition, gameAreaHeight);
 
