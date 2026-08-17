@@ -4,12 +4,14 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/collisions.dart';
+import 'package:true_idle/ui.dart';
 
 import 'box.dart';
 import 'buttons.dart';
 import 'enemies.dart';
 import 'player.dart';
 
+//
 class TrueIdleGame extends FlameGame with HasCollisionDetection {
   ValueNotifier<int> money = ValueNotifier<int>(0);
 
@@ -26,53 +28,22 @@ class TrueIdleGame extends FlameGame with HasCollisionDetection {
     final plusOneIconImage = await images.load('PlusOne_icon.png');
     final enemyImage = await images.load('Enemy1.png');
     final playerImage = await images.load('Player.png');
-
-    // --------------------------------------------------
-    // SCREEN LAYOUT
-    // --------------------------------------------------
-
-    final gameAreaHeight = size.y * 0.48;
-
-    final topBoxPosition = Vector2(4, 4);
-
+    final gameAreaHeight = size.y * 0.48 + 45;
+    final topBoxPosition = Vector2(4, 42);
     final topBoxSize = Vector2(size.x - 8, gameAreaHeight - 8);
-
     final bottomBoxPosition = Vector2(4, gameAreaHeight + 4);
-
     final bottomBoxSize = Vector2(size.x - 8, size.y - gameAreaHeight - 8);
-
-    // --------------------------------------------------
-    // TOP BOX
-    // --------------------------------------------------
-
-    add(BoxComponent(position: topBoxPosition, size: topBoxSize));
-
-    // --------------------------------------------------
-    // BOTTOM BOX
-    // --------------------------------------------------
-
-    add(BoxComponent(position: bottomBoxPosition, size: bottomBoxSize));
-
-    // --------------------------------------------------
-    // PLAYER
-    // --------------------------------------------------
-
     final playerPosition = Vector2(size.x / 2, gameAreaHeight / 2);
-
-    add(PlayerComponent(sprite: Sprite(playerImage), position: playerPosition));
-
-    // --------------------------------------------------
-    // ENEMY
-    // --------------------------------------------------
-
-    spawnEnemy(Sprite(enemyImage), playerPosition, gameAreaHeight);
-
-    // --------------------------------------------------
-    // BUTTON
-    // --------------------------------------------------
-
     final buttonWidth = bottomBoxSize.x * 0.32;
     final buttonHeight = buttonWidth / 3;
+    //here is where layers matter. it goes in order back to front:
+    add(BoxComponent(position: topBoxPosition, size: topBoxSize));
+    add(BoxComponent(position: bottomBoxPosition, size: bottomBoxSize));
+    add(PlayerComponent(sprite: Sprite(playerImage), position: playerPosition));
+    add(
+      CashDisplayBackground(position: Vector2(400, 20), size: Vector2(150, 60)),
+    );
+    spawnEnemy(Sprite(enemyImage), playerPosition, gameAreaHeight);
 
     add(
       PlusOne(
