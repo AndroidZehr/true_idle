@@ -36,6 +36,8 @@ class TrueIdleGame extends FlameGame with HasCollisionDetection {
     final playerPosition = Vector2(size.x / 2, gameAreaHeight / 2);
     final buttonWidth = bottomBoxSize.x * 0.32;
     final buttonHeight = buttonWidth / 3;
+    final cashPosition = Vector2(size.x - 180, 46);
+    final cashSize = Vector2(170, 60);
     //here is where layers matter. it goes in order back to front:
     add(BoxComponent(position: topBoxPosition, size: topBoxSize));
     add(BoxComponent(position: bottomBoxPosition, size: bottomBoxSize));
@@ -48,6 +50,7 @@ class TrueIdleGame extends FlameGame with HasCollisionDetection {
       ),
     );
     spawnEnemy(Sprite(enemyImage), playerPosition, gameAreaHeight);
+    add(CashDisplay(game: this, position: cashPosition, size: cashSize));
 
     add(
       PlusOne(

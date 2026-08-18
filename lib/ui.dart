@@ -16,25 +16,23 @@ class CashDisplay extends PositionComponent {
   void render(Canvas canvas) {
     super.render(canvas);
 
-    // Background
-    final backgroundPaint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.5);
+    final tealPaint = Paint()
+      ..color = const Color.fromARGB(255, 0, 247, 255).withValues(alpha: 0.45);
 
     final rect = RRect.fromRectAndRadius(
       size.toRect(),
       const Radius.circular(45),
     );
 
-    canvas.drawRRect(rect, backgroundPaint);
+    canvas.drawRRect(rect, tealPaint);
 
-    // Text
     final textPainter = TextPainter(
       text: TextSpan(
         text: 'Cash: ${game.money.value}',
         style: const TextStyle(
           fontSize: 28,
           fontWeight: FontWeight.bold,
-          color: Color.fromARGB(255, 10, 10, 10),
+          color: Colors.black,
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -49,5 +47,21 @@ class CashDisplay extends PositionComponent {
         (size.y - textPainter.height) / 2,
       ),
     );
+  }
+}
+
+class CashDisplayBackground extends PositionComponent {
+  CashDisplayBackground({required super.position, required super.size});
+
+  @override
+  void render(Canvas canvas) {
+    final paint = Paint()..color = Colors.white;
+
+    final rect = RRect.fromRectAndRadius(
+      size.toRect(),
+      const Radius.circular(45),
+    );
+
+    canvas.drawRRect(rect, paint);
   }
 }
